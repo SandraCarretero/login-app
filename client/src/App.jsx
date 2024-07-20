@@ -1,12 +1,16 @@
-import Users from './components/Users/Users';
+import { BrowserRouter } from 'react-router-dom';
+import AuthProvider from './providers/AuthProvider';
 import { GlobalStyles } from './styles/GlobalStyles';
+import Router from './router/Router';
 
 const App = () => {
 	return (
-		<>
-			<GlobalStyles />
-			<Users />
-		</>
+		<BrowserRouter>
+			<AuthProvider>
+				<GlobalStyles />
+				<Router />
+			</AuthProvider>
+		</BrowserRouter>
 	);
 };
 
