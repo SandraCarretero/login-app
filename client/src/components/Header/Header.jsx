@@ -8,16 +8,9 @@ const Header = () => {
 
 	return (
 		<StyledHeader>
-			<h1>LOGIN APP</h1>
 			{userLogged && <h3>Hello {userLogged.username}!</h3>}
 			<StyledNav>
 				<StyledMenu>
-					<li>
-						<Link to='/'>Home</Link>
-					</li>
-					<li>
-						<Link to='/users'>Users</Link>
-					</li>
 					{!userLogged && (
 						<>
 							<li>

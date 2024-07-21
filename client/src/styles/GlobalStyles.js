@@ -14,6 +14,8 @@ const GlobalStyles = createGlobalStyle`
     margin: 0;
     font-family: "Roboto", sans-serif;
     padding: 24px;
+    max-width: 90%;
+    margin: auto;
   }
   a{
     text-decoration: none;

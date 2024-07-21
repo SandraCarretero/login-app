@@ -2,8 +2,8 @@ import styled from 'styled-components';
 
 const StyledHeader = styled.header`
 	display: flex;
-	flex-direction: column;
 	align-items: center;
+	justify-content: space-between;
 `;
 
 const StyledNav = styled.nav`
