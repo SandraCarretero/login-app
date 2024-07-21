@@ -12,13 +12,13 @@ import {
 	StyledUserColorImg,
 	StyledUserEmail,
 	StyledUserList,
-	StyledUserName
+	StyledUserName,
+	StyledImg
 } from './home.styles';
 
 const Home = () => {
 	const [allUsers, setAllUsers] = useState();
 	const { userLogged, setUserLogged } = useContext(AuthContext);
-
 	const navigate = useNavigate();
 
 	useEffect(() => {
@@ -31,9 +31,15 @@ const Home = () => {
 				{allUsers.map(user => (
 					<StyledUserCard key={user._id}>
 						<StyledRow>
-							<StyledUserColorImg $color={user.color}>
-								{user.username.charAt(0).toUpperCase()}
-							</StyledUserColorImg>
+							{user.img ? (
+								<StyledUserColorImg>
+									<StyledImg src={user.img} alt={user.username} />
+								</StyledUserColorImg>
+							) : (
+								<StyledUserColorImg $color={user.color}>
+									{user.username.charAt(0).toUpperCase()}
+								</StyledUserColorImg>
+							)}
 							<StyledColumn>
 								<StyledUserName>{user.username}</StyledUserName>
 								<StyledUserEmail>{user.email}</StyledUserEmail>
@@ -44,14 +50,14 @@ const Home = () => {
 									<StyledIcon
 										onClick={() => navigate('/edit-user')}
 										src='/images/edit-icon.svg'
-										alt='Delete'
+										alt='Edit'
 									/>
 									<StyledIcon
 										onClick={() =>
 											deleteUser(setAllUsers, user, setUserLogged, navigate)
 										}
 										src='/images/delete-icon.svg'
-										alt='Edit'
+										alt='Delete'
 									/>
 								</StyledColumn>
 							)}

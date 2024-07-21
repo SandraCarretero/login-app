@@ -3,17 +3,16 @@ import AuthContext from '../../contexts/authContext';
 
 const UploadImg = () => {
 	const [file, setFile] = useState(null);
-
-	const { userLogged } = useContext(AuthContext);
+	const { userLogged, setUserLogged } = useContext(AuthContext);
 
 	return (
-		<form onSubmit={e => handleSubmit(e, file, userLogged)}>
+		<form onSubmit={e => handleSubmit(e, file, userLogged, setUserLogged)}>
 			<input
 				type='file'
 				name='image'
 				onChange={e => handleFileChange(e, setFile)}
 			/>
-			<input type='submit' value='Upadate Image' />
+			<input type='submit' value='Update Image' />
 		</form>
 	);
 };
@@ -23,7 +22,7 @@ const handleFileChange = (event, setFile) => {
 	setFile(file);
 };
 
-const handleSubmit = async (event, file, userLogged) => {
+const handleSubmit = async (event, file, userLogged, setUserLogged) => {
 	event.preventDefault();
 
 	const { id } = userLogged;
@@ -46,6 +45,12 @@ const handleSubmit = async (event, file, userLogged) => {
 
 		const result = await response.json();
 		console.log(result);
+
+		// Actualizar el estado global del usuario
+		setUserLogged({
+			...userLogged,
+			img: result.img // Suponiendo que el campo de la imagen en la respuesta es 'img'
+		});
 	} catch (error) {
 		console.error('Error uploading file:', error);
 	}

@@ -3,7 +3,7 @@ import Cookies from 'js-cookie';
 import AuthContext from '../../contexts/authContext';
 import { useNavigate } from 'react-router-dom';
 import {
-	ProfileContainer,
+	StyledProfileContainer,
 	StyledColorImg,
 	StyledEmail,
 	StyledImg,
@@ -20,7 +20,7 @@ const Profile = () => {
 	console.log(userLogged);
 
 	return (
-		<ProfileContainer>
+		<StyledProfileContainer>
 			<GoBack />
 			{!userLogged.img && (
 				<StyledColorImg $color={userLogged.color}>
@@ -38,7 +38,7 @@ const Profile = () => {
 				src='/images/logout.svg'
 				alt='Back'
 			/>
-		</ProfileContainer>
+		</StyledProfileContainer>
 	);
 };
 

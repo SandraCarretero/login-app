@@ -17,4 +17,12 @@ const StyledMenu = styled.ul`
 	gap: 10px;
 `;
 
-export { StyledHeader, StyledNav, StyledMenu };
+const StyledButton = styled.li`
+	background: #849fff;
+	color: white;
+	padding: 10px 15px;
+	border-radius: 10px;
+	cursor: pointer;
+`;
+
+export { StyledHeader, StyledNav, StyledMenu, StyledButton };

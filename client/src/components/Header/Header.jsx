@@ -1,7 +1,12 @@
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import AuthContext from '../../contexts/authContext';
-import { StyledHeader, StyledMenu, StyledNav } from './header.styles';
+import {
+	StyledButton,
+	StyledHeader,
+	StyledMenu,
+	StyledNav
+} from './header.styles';
 
 const Header = () => {
 	const { userLogged } = useContext(AuthContext);
@@ -13,18 +18,18 @@ const Header = () => {
 				<StyledMenu>
 					{!userLogged && (
 						<>
-							<li>
+							<StyledButton>
 								<Link to='/login'>Login</Link>
-							</li>
-							<li>
+							</StyledButton>
+							<StyledButton>
 								<Link to='/register'>Register</Link>
-							</li>
+							</StyledButton>
 						</>
 					)}
 					{userLogged && (
-						<li>
+						<StyledButton>
 							<Link to='/profile'>Profile</Link>
-						</li>
+						</StyledButton>
 					)}
 				</StyledMenu>
 			</StyledNav>

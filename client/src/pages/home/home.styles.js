@@ -10,6 +10,10 @@ const StyledUserList = styled.section`
 	gap: 25px;
 `;
 
+const StyledImg = styled.img`
+	width: 80px;
+`;
+
 const StyledRow = styled.div`
 	display: flex;
 	flex-direction: row;
@@ -75,6 +79,7 @@ const StyledIcon = styled.img`
 
 export {
 	StyledUserList,
+	StyledImg,
 	StyledRow,
 	StyledUserCard,
 	StyledUserColorImg,

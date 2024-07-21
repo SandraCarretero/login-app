@@ -1,9 +1,15 @@
 import { useContext } from 'react';
-import AuthContext from '../contexts/authContext';
-import GoBack from '../components/GoBack/GoBack';
-import { patchData } from '../utils/api';
-import { URLS } from '../constants/urls';
+import AuthContext from '../../contexts/authContext';
+import GoBack from '../../components/GoBack/GoBack';
+import { patchData } from '../../utils/api';
+import { URLS } from '../../constants/urls';
 import { useNavigate } from 'react-router-dom';
+import {
+	StyledButton,
+	StyledEditContainer,
+	StyledEditForm,
+	StyledInput
+} from './editUser.styles';
 
 const EditUser = () => {
 	const { userLogged, setUserLogged } = useContext(AuthContext);
@@ -12,19 +18,25 @@ const EditUser = () => {
 
 	if (userLogged)
 		return (
-			<>
+			<StyledEditContainer>
 				<h1>Edit User</h1>
 				<GoBack />
-				<form onSubmit={e => editUser(e, userLogged, setUserLogged, navigate)}>
-					<input
+				<StyledEditForm
+					onSubmit={e => editUser(e, userLogged, setUserLogged, navigate)}
+				>
+					<StyledInput
 						type='text'
 						defaultValue={userLogged.username}
 						name='username'
 					/>
-					<input type='text' defaultValue={userLogged.email} name='email' />
-					<input type='submit' value='Edit User' />
-				</form>
-			</>
+					<StyledInput
+						type='text'
+						defaultValue={userLogged.email}
+						name='email'
+					/>
+					<StyledButton type='submit' value='Edit User' />
+				</StyledEditForm>
+			</StyledEditContainer>
 		);
 };
 
@@ -43,7 +55,7 @@ const editUser = async (event, userLogged, setUserLogged, navigate) => {
 		username: username.value,
 		email: email.value
 	});
-	navigate('/users');
+	navigate('/');
 };
 
 export default EditUser;
