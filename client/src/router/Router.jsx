@@ -1,11 +1,11 @@
 import { Route, Routes } from 'react-router-dom';
 import Layout from '../layout/Layout';
-import Register from '../pages/Register';
 import ProtectedRoutes from './ProtectedRouter';
 import Home from '../pages/home/Home';
 import Profile from '../pages/profile/Profile';
 import Login from '../pages/login/Login';
 import EditUser from '../pages/editUser/EditUser';
+import Register from '../pages/register/Register';
 
 const Router = () => {
 	return (

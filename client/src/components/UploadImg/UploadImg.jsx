@@ -1,29 +1,50 @@
 import { useContext, useState } from 'react';
 import AuthContext from '../../contexts/authContext';
 
-const UploadImg = () => {
+const UploadImg = ({ setPreview }) => {
 	const [file, setFile] = useState(null);
 	const { userLogged, setUserLogged } = useContext(AuthContext);
 
 	return (
-		<form onSubmit={e => handleSubmit(e, file, userLogged, setUserLogged)}>
+		<form
+			onSubmit={e =>
+				handleSubmit(e, file, userLogged, setUserLogged, setFile, setPreview)
+			}
+		>
 			<input
 				type='file'
 				name='image'
-				onChange={e => handleFileChange(e, setFile)}
+				onChange={e => handleFileChange(e, setFile, setPreview)}
 			/>
-			<input type='submit' value='Update Image' />
+			<input type='submit' value='Update Image' disabled={!file} />
 		</form>
 	);
 };
 
-const handleFileChange = (event, setFile) => {
+const handleFileChange = (event, setFile, setPreview) => {
 	const file = event.target.files[0];
 	setFile(file);
+
+	if (file) {
+		const reader = new FileReader();
+		reader.onloadend = () => {
+			setPreview(reader.result);
+		};
+		reader.readAsDataURL(file);
+	}
 };
 
-const handleSubmit = async (event, file, userLogged, setUserLogged) => {
+const handleSubmit = async (
+	event,
+	file,
+	userLogged,
+	setUserLogged,
+	setFile,
+	setPreview
+) => {
 	event.preventDefault();
+
+	if (!file) return;
 
 	const { id } = userLogged;
 
@@ -47,10 +68,12 @@ const handleSubmit = async (event, file, userLogged, setUserLogged) => {
 		console.log(result);
 
 		// Actualizar el estado global del usuario
-		setUserLogged({
-			...userLogged,
-			img: result.img // Suponiendo que el campo de la imagen en la respuesta es 'img'
-		});
+		setUserLogged(prevUserLogged => ({
+			...prevUserLogged,
+			img: result.img
+		}));
+		setFile(null);
+		setPreview(null);
 	} catch (error) {
 		console.error('Error uploading file:', error);
 	}

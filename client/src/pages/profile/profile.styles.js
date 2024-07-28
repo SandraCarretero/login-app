@@ -27,6 +27,7 @@ const StyledColorImg = styled.div`
 
 const StyledImg = styled.img`
 	width: 150px;
+	border-radius: 50%;
 `;
 
 const StyledName = styled.span`

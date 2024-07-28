@@ -16,13 +16,26 @@ export const postData = async (url, body) => {
 	return data;
 };
 
-export const patchData = async (url, body) => {
-	const data = await fetchData(url, {
-		method: METHODS.PATCH,
-		body: JSON.stringify(body),
-		headers: HEADERS
-	});
-	return data;
+// utils/api.js
+export const patchData = async (url, data) => {
+	try {
+		const response = await fetch(url, {
+			method: 'PATCH',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(data)
+		});
+
+		if (!response.ok) {
+			throw new Error(`HTTP error! Status: ${response.status}`);
+		}
+
+		return await response.json();
+	} catch (error) {
+		console.error('Error in patchData:', error);
+		throw error;
+	}
 };
 
 export const deleteData = async url => {

@@ -23,7 +23,7 @@ const Home = () => {
 
 	useEffect(() => {
 		getUsers(setAllUsers);
-	}, []);
+	}, [userLogged]); // Agrega userLogged a las dependencias
 
 	if (allUsers)
 		return (

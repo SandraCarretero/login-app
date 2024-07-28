@@ -13,31 +13,29 @@ import {
 
 const EditUser = () => {
 	const { userLogged, setUserLogged } = useContext(AuthContext);
-
 	const navigate = useNavigate();
 
-	if (userLogged)
-		return (
-			<StyledEditContainer>
-				<h1>Edit User</h1>
-				<GoBack />
-				<StyledEditForm
-					onSubmit={e => editUser(e, userLogged, setUserLogged, navigate)}
-				>
-					<StyledInput
-						type='text'
-						defaultValue={userLogged.username}
-						name='username'
-					/>
-					<StyledInput
-						type='text'
-						defaultValue={userLogged.email}
-						name='email'
-					/>
-					<StyledButton type='submit' value='Edit User' />
-				</StyledEditForm>
-			</StyledEditContainer>
-		);
+	if (!userLogged) {
+		return <div>Loading...</div>;
+	}
+
+	return (
+		<StyledEditContainer>
+			<GoBack />
+			<h1>Edit User</h1>
+			<StyledEditForm
+				onSubmit={e => editUser(e, userLogged, setUserLogged, navigate)}
+			>
+				<StyledInput
+					type='text'
+					defaultValue={userLogged.username}
+					name='username'
+				/>
+				<StyledInput type='text' defaultValue={userLogged.email} name='email' />
+				<StyledButton type='submit' value='Edit User' />
+			</StyledEditForm>
+		</StyledEditContainer>
+	);
 };
 
 const editUser = async (event, userLogged, setUserLogged, navigate) => {
@@ -45,7 +43,10 @@ const editUser = async (event, userLogged, setUserLogged, navigate) => {
 
 	const { username, email } = event.target;
 
-	await patchData(URLS.USER_API + '/' + userLogged.id, {
+	console.log('User ID:', userLogged.id); // Verifica que el ID está disponible
+	console.log('URL:', `${URLS.API_USERS}/${userLogged.id}`); // Verifica la URL
+
+	await patchData(`${URLS.API_USERS}/${userLogged.id}`, {
 		username: username.value,
 		email: email.value
 	});
