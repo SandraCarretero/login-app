@@ -54,6 +54,8 @@ usersController.editImage = async (req, res) => {
       }
     }
   );
+
+  res.status(200).json({ img: fileUrl });
 };
 
 usersController.deleteUser = async (req, res) => {

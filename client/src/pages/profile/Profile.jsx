@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
 import AuthContext from '../../contexts/authContext';
 import { useNavigate } from 'react-router-dom';
@@ -17,6 +17,13 @@ const Profile = () => {
 	const [preview, setPreview] = useState(null);
 	const { userLogged, setUserLogged } = useContext(AuthContext);
 	const navigate = useNavigate();
+
+	useEffect(() => {
+		// Asegúrate de que la imagen se establece desde el estado global del usuario
+		if (userLogged && userLogged.img && !preview) {
+			setPreview(userLogged.img);
+		}
+	}, [userLogged, preview]);
 
 	return (
 		<StyledProfileContainer>

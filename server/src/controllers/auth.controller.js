@@ -55,7 +55,7 @@ authController.login = async (req, res) => {
       username: userFound.username,
       email: userFound.email,
       color: userFound.color,
-      image: userFound.image
+      img: userFound.image
     });
   } catch (err) {
     return res.status(500).send({ message: err.message });
